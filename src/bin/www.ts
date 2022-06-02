@@ -1,6 +1,7 @@
 import express from 'express';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
+import mongoose from 'mongoose';
 
 import logger from '../config/winston';
 
@@ -20,6 +21,10 @@ app.use(morgan('combined'));
 
 app.use('/api', mainRoute);
 
-app.listen(PORT, () => {
-    logger.info(`server is running on port ${PORT}`)
+mongoose.connect(`${process.env.mongoURL}`, () => {
+    logger.info(`mongodb is running on url: ${process.env.mongoURL}`)
+    app.listen(PORT, () => {
+        logger.info(`server is running on port ${PORT}`)
+    })
 })
+
