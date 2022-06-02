@@ -1,18 +1,14 @@
 import express from 'express';
-import morgan from 'morgan';
 
-import logger from './config/winston'
+const router = express.Router();
 
-import 'dotenv/config'
+import user from './user/userRouter';
 
-const PORT = process.env.PORT
-
-const app = express();
-
-app.use(morgan('combined'));
-
-
-
-app.listen(PORT, () => {
-    logger.info(`server is running on port ${PORT}`)
+//test if server is running
+router.get('/test', (req, res) => {
+    res.send({'server-status': 'running'})
 })
+
+router.use('/user', user)
+
+export default router;
