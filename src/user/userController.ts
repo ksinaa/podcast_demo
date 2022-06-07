@@ -3,10 +3,11 @@ import { Request, Response, NextFunction } from 'express';
 import User from './User'
 
 const getUserById = (req: Request, res: Response, next: NextFunction) => {
+
     User.findOne({_id: req.params.id}).then(resualt => {
         res.status(200).send({
             "status": "OK",
-            "resualt": resualt 
+            "resualt": resualt || []
         })
     }).catch(err => {
         res.status(500).send({
@@ -16,7 +17,9 @@ const getUserById = (req: Request, res: Response, next: NextFunction) => {
     })
 }
 
+
 const getAllUsers = (req: Request, res: Response, next: NextFunction) => {
+
     User.find().then(resualt => {
         res.status(200).send({
             "status": "OK",
@@ -61,6 +64,17 @@ const updateUser = (req: Request, res: Response, next: NextFunction) => {
 
 const deleteUser = (req: Request, res: Response, next: NextFunction) => {
 
+    User.deleteOne({_id: req.params.id}).then(resualt => {
+        res.status(200).send({
+            "status": "OK",
+            "resualt": resualt
+        })
+    }).catch(err => {
+        res.status(500).send({
+            "status": "error",
+            "msg": err
+        })
+    })
 }
 
 export {
