@@ -1,8 +1,6 @@
 import winston from "winston";
 import appRoot from 'app-root-path'
 
-
-
 let options = {
     file: {
       level: 'info',
