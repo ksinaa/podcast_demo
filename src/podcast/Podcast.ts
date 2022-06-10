@@ -6,6 +6,7 @@ interface IPodcast extends mongoose.Document{
     publisherId: String,
     duration: Number,
     describtion: String,
+    listened: Number
 }
 
 const podcast = new mongoose.Schema({
@@ -29,6 +30,10 @@ const podcast = new mongoose.Schema({
     describtion: {
         type: String,
         required: false
+    },
+    listened: {
+        type: Number,
+        required: true
     }
 
 })
