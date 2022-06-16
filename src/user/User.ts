@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 
+import Podcast from '../podcast/Podcast'
+
 interface IUser extends mongoose.Document {
     userName: String;
     email: String
@@ -20,12 +22,17 @@ const Users = new mongoose.Schema({
         type: String,
         required: true
     },
-    // podcasts: {
+    podcasts: [{
+        podcastId: String 
+    }],
+    history: [{
+        podcastId: String,
+        time: Number
+    }],
+    subscribe: [{
+        userId: String
+    }]
 
-    // },
-    // history: {
-
-    // }
 
 })
 

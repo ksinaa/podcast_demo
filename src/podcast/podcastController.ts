@@ -5,7 +5,7 @@ import Podcast from "./Podcast"
 const getPodcastById = (req: Request, res: Response, next: NextFunction) => {
 
     Podcast.findOne({_id: req.params.id}).then(podcast => {
-        res.status(200).send(podcast)
+        res.status(200).json(podcast)
     })
 }
 
@@ -13,12 +13,12 @@ const getAllPodcasts = (req: Request, res: Response, next: NextFunction) => {
 
 
     Podcast.find().then(podcasts => {
-        res.status(200).send(podcasts)
+        res.status(200).json(podcasts)
     })
 
 }
 
-const createPodcast = (req: Request, res: Response, next: NextFunction) => {
+const createPodcast = async (req: Request, res: Response, next: NextFunction) => {
 
     const subject: String = req.body.subject;
     const file = null;
@@ -36,8 +36,8 @@ const createPodcast = (req: Request, res: Response, next: NextFunction) => {
         listened
     })
 
-    podcast.save().then(resualt => {
-        res.status(200).send(resualt)
+    await podcast.save().then(resualt => {
+        res.status(200).json(resualt)
     })
 }
 
@@ -47,7 +47,7 @@ const updatePodcast = (req: Request, res: Response, next: NextFunction) => {
 
 const deletePodcast = (req: Request, res: Response, next: NextFunction) => {
     Podcast.deleteOne({_id: req.params.id}).then(resualt => {
-        res.status(200).send(resualt)
+        res.status(200).json(resualt)
     })
 }
 
